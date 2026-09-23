@@ -1,5 +1,5 @@
 resource "docker_image" "postgres" {
-  name = "postgres:16-alpine"
+  name         = "postgres:16-alpine"
 }
 
 resource "docker_container" "db" {
@@ -9,6 +9,10 @@ resource "docker_container" "db" {
   env = [
     "POSTGRES_PASSWORD=${var.db_password}"
   ]
+
+  networks_advanced {
+    name = docker_network.api_db.name
+  }
 
   ports {
     internal = 5432

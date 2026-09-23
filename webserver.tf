@@ -1,10 +1,14 @@
 resource "docker_image" "nginx" {
-  name = "nginx:1.31.6"
+  name         = "nginx:1.31.6"
 }
 
 resource "docker_container" "web" {
   name  = "web-${terraform.workspace}"
   image = docker_image.nginx.image_id
+
+  networks_advanced {
+    name = docker_network.frontend_api.name
+  }
 
   ports {
     internal = 80
