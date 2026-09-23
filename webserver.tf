@@ -1,5 +1,5 @@
 resource "docker_image" "nginx" {
-  name = "nginx:latest"
+  name = "nginx:1.31.6"
 }
 
 resource "docker_container" "web" {
